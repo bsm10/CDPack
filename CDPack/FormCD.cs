@@ -55,24 +55,36 @@ namespace CDPack
             string result = string.Empty;
             foreach (string line in strings)
             {
-                list.Add(line.Split(' '));
-            }
-            //2 points
-            if(list.Count > 2)
-            {
-
-            }
-            else//1points
-            {
-                if (list[0][0] == "0")
+                string[] point = new string[2];
+                point = line.Split(' ');
+                if(point[0] != "0")
                 {
-                    result = $"{list[0][1].ToKsegY()}{list[1][0].ToKsegX()}{list[1][1].ToKsegY()}";
+                    result += point[0].ToKsegX() + point[1].ToKsegY();
                 }
                 else
                 {
-                    result = $"{list[0][0].ToKsegX()}{list[0][1].ToKsegY()}{ list[1][0].ToKsegX()}{list[1][1].ToKsegY()}";
+                    result += point[1].ToKsegY();
                 }
+                
+                //list.Add(line.Split(' '));
             }
+
+            ////2 points
+            //if(list.Count > 2)
+            //{
+
+            //}
+            //else//1points
+            //{
+            //    if (list[0][0] == "0")
+            //    {
+            //        result = $"{list[0][1].ToKsegY()}{list[1][0].ToKsegX()}{list[1][1].ToKsegY()}";
+            //    }
+            //    else
+            //    {
+            //        result = $"{list[0][0].ToKsegX()}{list[0][1].ToKsegY()}{ list[1][0].ToKsegX()}{list[1][1].ToKsegY()}";
+            //    }
+            //}
 #if DEBUG
             string hex = "";
             byte[] bte = File.ReadAllBytes(filePath);
