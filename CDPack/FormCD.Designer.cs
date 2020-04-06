@@ -66,10 +66,12 @@
             // 
             // lblKSeg1
             // 
+            this.lblKSeg1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblKSeg1.BackColor = System.Drawing.SystemColors.Window;
             this.lblKSeg1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblKSeg1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.lblKSeg1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblKSeg1.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblKSeg1.Location = new System.Drawing.Point(155, 12);
             this.lblKSeg1.Name = "lblKSeg1";
             this.lblKSeg1.Size = new System.Drawing.Size(633, 35);
@@ -78,10 +80,12 @@
             // 
             // lblSPSSeg1
             // 
+            this.lblSPSSeg1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSPSSeg1.BackColor = System.Drawing.SystemColors.Window;
             this.lblSPSSeg1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblSPSSeg1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.lblSPSSeg1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblSPSSeg1.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblSPSSeg1.Location = new System.Drawing.Point(155, 64);
             this.lblSPSSeg1.Name = "lblSPSSeg1";
             this.lblSPSSeg1.Size = new System.Drawing.Size(633, 35);
@@ -90,10 +94,12 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.BackColor = System.Drawing.SystemColors.Window;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(155, 194);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(633, 35);
@@ -102,10 +108,12 @@
             // 
             // lblKSeg2
             // 
+            this.lblKSeg2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblKSeg2.BackColor = System.Drawing.SystemColors.Window;
             this.lblKSeg2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblKSeg2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.lblKSeg2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblKSeg2.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblKSeg2.Location = new System.Drawing.Point(155, 142);
             this.lblKSeg2.Name = "lblKSeg2";
             this.lblKSeg2.Size = new System.Drawing.Size(633, 35);
@@ -135,6 +143,8 @@
             // 
             // lblProgress
             // 
+            this.lblProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblProgress.AutoSize = true;
             this.lblProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblProgress.Location = new System.Drawing.Point(12, 257);
@@ -145,6 +155,8 @@
             // 
             // progressBarCD
             // 
+            this.progressBarCD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBarCD.Location = new System.Drawing.Point(12, 277);
             this.progressBarCD.Name = "progressBarCD";
             this.progressBarCD.Size = new System.Drawing.Size(773, 26);
@@ -152,6 +164,8 @@
             // 
             // btnExecute
             // 
+            this.btnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExecute.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnExecute.Location = new System.Drawing.Point(7, 309);
@@ -160,6 +174,7 @@
             this.btnExecute.TabIndex = 10;
             this.btnExecute.Text = "Выполнить";
             this.btnExecute.UseVisualStyleBackColor = true;
+            this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
             // 
             // FormCD
             // 
