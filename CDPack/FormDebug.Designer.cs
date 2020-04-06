@@ -34,10 +34,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtSPSSeg1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.txtUnpack = new System.Windows.Forms.RichTextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.txtStringForUnpack = new System.Windows.Forms.RichTextBox();
+            this.btnUnpack = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +52,7 @@
             this.groupBox1.Controls.Add(this.txtKSeg1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(828, 472);
+            this.groupBox1.Size = new System.Drawing.Size(1315, 472);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Исходные файлы";
@@ -65,7 +65,7 @@
             this.txtKSeg1.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtKSeg1.Location = new System.Drawing.Point(9, 52);
             this.txtKSeg1.Name = "txtKSeg1";
-            this.txtKSeg1.Size = new System.Drawing.Size(813, 194);
+            this.txtKSeg1.Size = new System.Drawing.Size(1300, 194);
             this.txtKSeg1.TabIndex = 1;
             this.txtKSeg1.Text = "";
             // 
@@ -95,70 +95,77 @@
             this.txtSPSSeg1.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtSPSSeg1.Location = new System.Drawing.Point(6, 271);
             this.txtSPSSeg1.Name = "txtSPSSeg1";
-            this.txtSPSSeg1.Size = new System.Drawing.Size(816, 195);
+            this.txtSPSSeg1.Size = new System.Drawing.Size(1303, 195);
             this.txtSPSSeg1.TabIndex = 3;
             this.txtSPSSeg1.Text = "";
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.richTextBox1);
+            this.groupBox2.Controls.Add(this.btnUnpack);
+            this.groupBox2.Controls.Add(this.txtUnpack);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.richTextBox2);
+            this.groupBox2.Controls.Add(this.txtStringForUnpack);
             this.groupBox2.Location = new System.Drawing.Point(9, 502);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(828, 245);
+            this.groupBox2.Size = new System.Drawing.Size(1315, 245);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Закодированные файлы";
+            this.groupBox2.Text = "Распаковка";
             // 
-            // label3
+            // txtUnpack
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(405, 32);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 17);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "SPSSeg1";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBox1.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox1.Location = new System.Drawing.Point(408, 52);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(408, 178);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
+            this.txtUnpack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtUnpack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUnpack.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtUnpack.Location = new System.Drawing.Point(9, 91);
+            this.txtUnpack.Name = "txtUnpack";
+            this.txtUnpack.Size = new System.Drawing.Size(1294, 139);
+            this.txtUnpack.TabIndex = 3;
+            this.txtUnpack.Text = "";
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 32);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 17);
+            this.label4.Size = new System.Drawing.Size(163, 17);
             this.label4.TabIndex = 2;
-            this.label4.Text = "KSeg1";
+            this.label4.Text = "Строка для распаковки";
             // 
-            // richTextBox2
+            // txtStringForUnpack
             // 
-            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBox2.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox2.Location = new System.Drawing.Point(9, 52);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(393, 178);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
+            this.txtStringForUnpack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStringForUnpack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtStringForUnpack.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtStringForUnpack.Location = new System.Drawing.Point(9, 52);
+            this.txtStringForUnpack.Name = "txtStringForUnpack";
+            this.txtStringForUnpack.Size = new System.Drawing.Size(1159, 36);
+            this.txtStringForUnpack.TabIndex = 1;
+            this.txtStringForUnpack.Text = "";
+            // 
+            // btnUnpack
+            // 
+            this.btnUnpack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUnpack.Location = new System.Drawing.Point(1174, 49);
+            this.btnUnpack.Name = "btnUnpack";
+            this.btnUnpack.Size = new System.Drawing.Size(128, 38);
+            this.btnUnpack.TabIndex = 4;
+            this.btnUnpack.Text = "Распаковать";
+            this.btnUnpack.UseVisualStyleBackColor = true;
+            this.btnUnpack.Click += new System.EventHandler(this.btnUnpack_Click);
             // 
             // FormDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 759);
+            this.ClientSize = new System.Drawing.Size(1336, 759);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormDebug";
@@ -177,11 +184,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.RichTextBox txtSPSSeg1;
         public System.Windows.Forms.RichTextBox txtKSeg1;
-        public System.Windows.Forms.RichTextBox richTextBox1;
-        public System.Windows.Forms.RichTextBox richTextBox2;
+        public System.Windows.Forms.RichTextBox txtUnpack;
+        private System.Windows.Forms.Button btnUnpack;
+        public System.Windows.Forms.RichTextBox txtStringForUnpack;
     }
 }

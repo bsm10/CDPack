@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,27 @@ namespace CDPack
 {
     class Helpers
     {
+        public static string PackKSeg(string filePath)
+        {
+            string[] strings = File.ReadAllLines(filePath);
+            List<string[]> list = new List<string[]>();
+            string result = string.Empty;
+            foreach (string line in strings)
+            {
+                string[] point = new string[2];
+                point = line.Split(' ');
+                if (point[0] != "0")
+                    result += point[0].ToKsegX() + point[1].ToKsegY();
+                else
+                    result += point[1].ToKsegY();
+            }
+            return result;
+        }
+
+        public static string UnPackKSeg(string packagedString)
+        {
+            return packagedString.HexToBin();
+        }
     }
 
     public static class StringExtension
@@ -38,7 +60,7 @@ namespace CDPack
         public static string DecToBin(this string number)
         {
             //Convert.ToString(Convert.ToInt32(number, fromBase), toBase);
-            return Convert.ToString(Convert.ToInt32(number, 10), 2);
+            return Convert.ToString(Convert.ToInt64(number, 10), 2);
         }
         public static string DecToHex(this string number)
         {
@@ -60,15 +82,28 @@ namespace CDPack
         }
         public static string HexToBin(this string number)
         {
-            return Convert.ToString(Convert.ToInt64(number, 16), 2);
+            //return Convert.ToString(Convert.ToInt64(number, 16), 2);
+            return string.Join("", Enumerable.Range(0, number.Length / 2).Select(i =>
+                Convert.ToString(Convert.ToInt64(number.Substring(i * 2, 2), 16), 2).PadLeft(8, '0')));
         }
 
         //00000010 00000001 00010100 00111101 10111100 00000001 11100001 00010100 00100110 00110100
         //02 01 14 3D BC 01 E1 14 26 34
+
+        //00000001 00001000 00011011 10111001 00000010 00000001 00010100 00111101 10111100
+        //01 08 1B B9 02 01 14 3D BC
         public static string BinToHex(this string binary)
         {
-            return string.Join("", Enumerable.Range(0, binary.Length / 8).Select(i =>
-                Convert.ToByte(binary.Substring(i * 8, 8), 2).ToString("X2")));
+            int strlen = binary.Length;
+            int lastBit = strlen % 8;
+            string str = string.Empty;
+            if (lastBit != 0)
+                str = binary.PadLeft(strlen + 8 - lastBit, '0');
+            else
+                str = binary;
+            return string.Join("", Enumerable.Range(0, str.Length / 8).Select(i =>
+                Convert.ToByte(str.Substring(i * 8, 8), 2).ToString("X2")));
         }
+
     }
 }
