@@ -8,14 +8,6 @@ namespace CDPack
 {
     class Helpers
     {
-        public void Str()
-        {
-            string number = "100";
-            int fromBase = 16;
-            int toBase = 10;
-            string result = Convert.ToString(Convert.ToInt32(number, fromBase), toBase);
-            string s = "100".DecToBin();
-        }
     }
 
     public static class StringExtension
@@ -52,10 +44,12 @@ namespace CDPack
         {
             return Convert.ToString(Convert.ToInt64(number, 10), 16);
         }
-        public static string BinToHex(this string number)
-        {
-            return string.Format("{0:X2}", Convert.ToInt64(number, 2), 16);
-        }
+        //public static string BinToHex(this string number)
+        //{
+
+        //    //return string.Format("{0:X2}", Convert.To(number, 2), 16);
+        //    return string.Format("{0:X2}", Convert.ToInt64(number, 2), 16);
+        //}
         public static string BinToDec(this string number)
         {
             return Convert.ToString(Convert.ToInt64(number, 2), 10);
@@ -67,6 +61,14 @@ namespace CDPack
         public static string HexToBin(this string number)
         {
             return Convert.ToString(Convert.ToInt64(number, 16), 2);
+        }
+
+        //00000010 00000001 00010100 00111101 10111100 00000001 11100001 00010100 00100110 00110100
+        //02 01 14 3D BC 01 E1 14 26 34
+        public static string BinToHex(this string binary)
+        {
+            return string.Join("", Enumerable.Range(0, binary.Length / 8).Select(i =>
+                Convert.ToByte(binary.Substring(i * 8, 8), 2).ToString("X2")));
         }
     }
 }
