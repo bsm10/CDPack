@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static CDPack.Helpers;
 
@@ -52,6 +45,7 @@ namespace CDPack
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
+            if (lblKSeg1.Text == "") return;
             string kseg1 = PackKSeg(lblKSeg1.Text);
             string hex = "";
             byte[] bte = File.ReadAllBytes(lblKSeg1.Text);
@@ -60,10 +54,12 @@ namespace CDPack
             {
                 hex += string.Format("{0:X2}", b);
             }
-            string bin = kseg1.BinToHex();
+            string binToHex = kseg1.BinToHex();
             frmDebug.txtKSeg1.Text = $"File:\r\n{fileText}" +
                                      $"\r\nFile Hex: {hex} ({hex.Length/2} bytes)" +
-                                     $"\r\nBin: {kseg1} ({kseg1.Length} bits)\r\nHex: {bin} ({bin.Length/2}) bytes";
+                                     $"\r\nBin: {kseg1} ({kseg1.Length} bits)\r\nHex: {binToHex} ({binToHex.Length/2}) bytes";
+            frmDebug.txtStringForUnpack.Text = binToHex;
+            frmDebug.txtUnpack.Text = UnPackKSeg(binToHex);
         }
     }
 }

@@ -28,7 +28,47 @@ namespace CDPack
 
         public static string UnPackKSeg(string packagedString)
         {
-            return packagedString.HexToBin();
+            //Распаковка справа на лево  X(15)Y(25)X(15)Y(25)
+            List<string> lst = new List<string>();
+            string bin = packagedString.HexToBin();
+            string res = string.Empty;
+            int len = bin.Length;
+
+            //var results = bin.Select((c, i) => new { c, i })
+            //.GroupBy(x => x.i / 40)
+            //.Select(g => string.Join("", g.Select(y => y.c)))
+            //.ToList();
+            string XY = string.Empty;
+            string Yi = string.Empty;
+            string Xi = string.Empty;
+            for (int i = 1; i < bin.Length; i++)
+            {
+                if(i * 40 <= len)
+                {
+                    XY = bin.Substring(len - i * 40, 40);
+                    Yi = Sign(XY.Substring(15, 1)) + XY.Substring(16, 24).BinToDec();
+                    Xi = XY.Substring(0, 15).BinToDec();
+                    res = $"{Xi} {Yi}\r\n{res}";
+                }
+                else // добавить первый Y без X
+                {
+                    //0000000 1000010000001101110111001 000000100000000 1000101000011110110111100
+                    XY = bin.Substring(i * 40 - len - 1, 25);
+                    Yi = Sign(XY.Substring(0, 1)) + XY.Substring(1, 24).BinToDec();
+                    res = $"0 {Yi}\r\n{res}";
+                }
+
+                if(i * 40 >= len) break;
+            }
+            return res;
+        }
+
+        private static string Sign (string bit)
+        {
+            if (bit == "0")
+                return "";
+            else
+                return "-";
         }
     }
 
@@ -92,6 +132,7 @@ namespace CDPack
 
         //00000001 00001000 00011011 10111001 00000010 00000001 00010100 00111101 10111100
         //01 08 1B B9 02 01 14 3D BC
+        //Перевод в байты по 8 бит слева на право!
         public static string BinToHex(this string binary)
         {
             int strlen = binary.Length;
@@ -101,8 +142,9 @@ namespace CDPack
                 str = binary.PadLeft(strlen + 8 - lastBit, '0');
             else
                 str = binary;
+
             return string.Join("", Enumerable.Range(0, str.Length / 8).Select(i =>
-                Convert.ToByte(str.Substring(i * 8, 8), 2).ToString("X2")));
+                            Convert.ToByte(str.Substring(i * 8, 8), 2).ToString("X2")));
         }
 
     }
