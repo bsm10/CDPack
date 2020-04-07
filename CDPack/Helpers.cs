@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CDPack
 {
@@ -135,17 +136,24 @@ namespace CDPack
         //Перевод в байты по 8 бит слева на право!
         public static string BinToHex(this string binary)
         {
-            int strlen = binary.Length;
-            int lastBit = strlen % 8;
-            string str = string.Empty;
-            if (lastBit != 0)
-                str = binary.PadLeft(strlen + 8 - lastBit, '0');
-            else
-                str = binary;
+            try
+            {
+                int strlen = binary.Length;
+                int lastBit = strlen % 8;
+                string str = string.Empty;
+                if (lastBit != 0)
+                    str = binary.PadLeft(strlen + 8 - lastBit, '0');
+                else
+                    str = binary;
 
-            return string.Join("", Enumerable.Range(0, str.Length / 8).Select(i =>
-                            Convert.ToByte(str.Substring(i * 8, 8), 2).ToString("X2")));
+                return string.Join("", Enumerable.Range(0, str.Length / 8).Select(i =>
+                                Convert.ToByte(str.Substring(i * 8, 8), 2).ToString("X2")));
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return string.Empty;
         }
-
     }
 }
