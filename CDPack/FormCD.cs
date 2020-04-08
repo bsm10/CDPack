@@ -157,7 +157,10 @@ namespace CDPack
             Stopwatch sw = new Stopwatch();
             sw.Start();
             int i = 1;
-            
+            progressBarCD.Value = 0;
+            progressBarCD.Minimum = 0;
+            progressBarCD.Maximum = 100;
+
             await Task.Run(() =>
             {
                 string filenameUnpack;
@@ -166,7 +169,10 @@ namespace CDPack
                 // пока не достигнут конец файла считываем каждое значение из файла
                 while (reader.PeekChar() > -1)
                 {
-                    if(i == 1)//первая точка с нулем: 0 -132560 - 32 + 40 bit  
+                    progress.Report((int)(reader.BaseStream.Position * 100 / fi.Length));
+                    progressTime.Report(sw.Elapsed.ToString());
+
+                    if (i == 1)//первая точка с нулем: 0 -132560 - 32 + 40 bit  
                     {
                         //Первый файл
                         byte[] arr = reader.ReadBytes(10);
@@ -175,7 +181,6 @@ namespace CDPack
                         string Y0 = GetCoordinateFromBin(binaryString.Substring(15, 25));
                         string X = GetCoordinateFromBin(binaryString.Substring(40, 15));
                         string Y = GetCoordinateFromBin(binaryString.Substring(55, 25));
-                        
                         lastY = $"0 {Y}";
                         filenameUnpack = Path.Combine(diNew.FullName, $"KSin1.txt");
                         File.WriteAllText(filenameUnpack, $"0 {Y0}\r\n{X} {Y}");
@@ -193,7 +198,6 @@ namespace CDPack
                                 Convert.ToString(arr[j], 2).PadLeft(8, '0')));
                         string X = GetCoordinateFromBin(binaryString.Substring(8, 15));
                         string Y = GetCoordinateFromBin(binaryString.Substring(23, 25));
-
                         filenameUnpack = Path.Combine(diNew.FullName, $"KSin{i}.txt");
                         File.WriteAllText(filenameUnpack, $"{lastY}\r\n{X} {Y}");
                         if (arr[0] == 0x01) //если байт количества точек == 1, точек три!
@@ -201,30 +205,14 @@ namespace CDPack
                             File.AppendAllText(filenameUnpack, Environment.NewLine + Read5Bytes(reader.ReadBytes(5)));
                         }
                         i++;
-
                     }
-
-
-                    //считываем байты и конвертируем в двоичное число, которое потом конвертируем в координаты Х и У
-                    // и записываем в файл с предыдущей координатой У
-                    //filenameUnpack = Path.Combine(diNew.FullName, $"KSin{i}.txt");
-                    //string buff = string.Empty;
-                    //if (reader.ReadByte() == 0x0) // 2 Points
-                    //{
-                    //    // 5 byte -> 40 bit (15 bit X; 25 bit Y)
-                    //    buff = $"{lastY}\r\n{Read5Bytes(reader.ReadBytes(4))}";
-                    //}
-                    //else
-                    //{   // 10 byte -> 80 bit
-                    //    buff = $"{lastY}\r\n{Read5Bytes(reader.ReadBytes(4))}\r\n";
-                    //    buff += Read5Bytes(reader.ReadBytes(5));
-                    //}
-                    //File.WriteAllText(filenameUnpack, buff);
                 }
                 reader.Close();
-                
             });
             sw.Stop();
+            progressBarCD.Value = 0;
+            lblProgress.Text = $"Готово! Распаковано {i - 1} файлов {diNew.FullName}. Время: {sw.Elapsed}";
+
         }
 
         private string Read5Bytes(byte[] arr)

@@ -49,7 +49,7 @@
             // 
             this.btnKSeg1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnKSeg1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKSeg1.Location = new System.Drawing.Point(12, 12);
+            this.btnKSeg1.Location = new System.Drawing.Point(13, 229);
             this.btnKSeg1.Name = "btnKSeg1";
             this.btnKSeg1.Size = new System.Drawing.Size(137, 35);
             this.btnKSeg1.TabIndex = 0;
@@ -60,7 +60,7 @@
             // btnSPSSeg1
             // 
             this.btnSPSSeg1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSPSSeg1.Location = new System.Drawing.Point(12, 60);
+            this.btnSPSSeg1.Location = new System.Drawing.Point(13, 277);
             this.btnSPSSeg1.Name = "btnSPSSeg1";
             this.btnSPSSeg1.Size = new System.Drawing.Size(137, 35);
             this.btnSPSSeg1.TabIndex = 1;
@@ -76,7 +76,7 @@
             this.lblKSeg1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblKSeg1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblKSeg1.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblKSeg1.Location = new System.Drawing.Point(155, 12);
+            this.lblKSeg1.Location = new System.Drawing.Point(156, 229);
             this.lblKSeg1.Name = "lblKSeg1";
             this.lblKSeg1.Size = new System.Drawing.Size(833, 35);
             this.lblKSeg1.TabIndex = 2;
@@ -90,7 +90,7 @@
             this.lblSPSSeg1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblSPSSeg1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblSPSSeg1.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblSPSSeg1.Location = new System.Drawing.Point(155, 60);
+            this.lblSPSSeg1.Location = new System.Drawing.Point(156, 277);
             this.lblSPSSeg1.Name = "lblSPSSeg1";
             this.lblSPSSeg1.Size = new System.Drawing.Size(833, 35);
             this.lblSPSSeg1.TabIndex = 3;
@@ -102,7 +102,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblProgress.AutoSize = true;
             this.lblProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblProgress.Location = new System.Drawing.Point(9, 581);
+            this.lblProgress.Location = new System.Drawing.Point(12, 399);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(175, 20);
             this.lblProgress.TabIndex = 8;
@@ -112,17 +112,18 @@
             // 
             this.progressBarCD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBarCD.Location = new System.Drawing.Point(9, 601);
+            this.progressBarCD.Location = new System.Drawing.Point(16, 424);
             this.progressBarCD.Name = "progressBarCD";
             this.progressBarCD.Size = new System.Drawing.Size(973, 26);
             this.progressBarCD.TabIndex = 9;
             // 
             // btnExecute
             // 
-            this.btnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExecute.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnExecute.Location = new System.Drawing.Point(9, 101);
+            this.btnExecute.Location = new System.Drawing.Point(10, 323);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(979, 40);
             this.btnExecute.TabIndex = 10;
@@ -138,7 +139,7 @@
             this.lblFolderKseg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblFolderKseg.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblFolderKseg.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblFolderKseg.Location = new System.Drawing.Point(266, 160);
+            this.lblFolderKseg.Location = new System.Drawing.Point(266, 14);
             this.lblFolderKseg.Name = "lblFolderKseg";
             this.lblFolderKseg.Size = new System.Drawing.Size(722, 35);
             this.lblFolderKseg.TabIndex = 12;
@@ -148,7 +149,7 @@
             // 
             this.btnSelectFolderKSeg.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnSelectFolderKSeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSelectFolderKSeg.Location = new System.Drawing.Point(12, 160);
+            this.btnSelectFolderKSeg.Location = new System.Drawing.Point(12, 14);
             this.btnSelectFolderKSeg.Name = "btnSelectFolderKSeg";
             this.btnSelectFolderKSeg.Size = new System.Drawing.Size(248, 35);
             this.btnSelectFolderKSeg.TabIndex = 11;
@@ -158,10 +159,11 @@
             // 
             // btnPackFolder
             // 
-            this.btnPackFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPackFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPackFolder.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnPackFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnPackFolder.Location = new System.Drawing.Point(12, 201);
+            this.btnPackFolder.Location = new System.Drawing.Point(12, 56);
             this.btnPackFolder.Name = "btnPackFolder";
             this.btnPackFolder.Size = new System.Drawing.Size(976, 40);
             this.btnPackFolder.TabIndex = 13;
@@ -171,20 +173,22 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(13, 431);
+            this.button1.Location = new System.Drawing.Point(10, 369);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(201, 36);
+            this.button1.Size = new System.Drawing.Size(201, 27);
             this.button1.TabIndex = 14;
             this.button1.Text = "Отладка";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnUnpack
             // 
-            this.btnUnpack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUnpack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUnpack.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnUnpack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnUnpack.Location = new System.Drawing.Point(13, 303);
+            this.btnUnpack.Location = new System.Drawing.Point(13, 157);
             this.btnUnpack.Name = "btnUnpack";
             this.btnUnpack.Size = new System.Drawing.Size(976, 40);
             this.btnUnpack.TabIndex = 17;
@@ -200,7 +204,7 @@
             this.lblUnpack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblUnpack.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblUnpack.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblUnpack.Location = new System.Drawing.Point(267, 262);
+            this.lblUnpack.Location = new System.Drawing.Point(267, 116);
             this.lblUnpack.Name = "lblUnpack";
             this.lblUnpack.Size = new System.Drawing.Size(722, 35);
             this.lblUnpack.TabIndex = 16;
@@ -210,7 +214,7 @@
             // 
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(13, 262);
+            this.button3.Location = new System.Drawing.Point(13, 116);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(248, 35);
             this.button3.TabIndex = 15;
@@ -222,7 +226,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 823);
+            this.ClientSize = new System.Drawing.Size(1000, 469);
             this.Controls.Add(this.btnUnpack);
             this.Controls.Add(this.lblUnpack);
             this.Controls.Add(this.button3);
