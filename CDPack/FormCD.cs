@@ -136,6 +136,7 @@ namespace CDPack
                         else
                             writer.Write(PackKSin(Path.Combine(folder, file)).BinToByte());
                         Console.WriteLine($"packing {file}");
+                        i++;
                     }
                     Console.WriteLine($"Ok!");
                 }
@@ -155,51 +156,82 @@ namespace CDPack
             DirectoryInfo diNew =  Directory.CreateDirectory(fi.DirectoryName + @"\pck");
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            int i = 0;
+            int i = 1;
+            
             await Task.Run(() =>
             {
+                string filenameUnpack;
                 string lastY = string.Empty;
                 BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open));
                 // пока не достигнут конец файла считываем каждое значение из файла
                 while (reader.PeekChar() > -1)
                 {
-                    if(i == 0)//первая точка с нулем: 0 -132560 - 32 + 40 bit  
+                    if(i == 1)//первая точка с нулем: 0 -132560 - 32 + 40 bit  
                     {
-                        //
+                        //Первый файл
                         byte[] arr = reader.ReadBytes(10);
                         string binaryString = string.Join("", Enumerable.Range(0, arr.Length).Select(j =>
                                 Convert.ToString(arr[j], 2).PadLeft(8, '0')));
-                        Console.WriteLine(binaryString.Length);
                         string Y0 = GetCoordinateFromBin(binaryString.Substring(15, 25));
                         string X = GetCoordinateFromBin(binaryString.Substring(40, 15));
                         string Y = GetCoordinateFromBin(binaryString.Substring(55, 25));
-                        lastY = "0 {Y}";
-                        i++;
-                        string filenameUnpack = Path.Combine(diNew.FullName, $"KSin{i}.txt");
-                        File.WriteAllText(filenameUnpack, $"0 {Y0}\r\n{X} {Y}");
                         
+                        lastY = $"0 {Y}";
+                        filenameUnpack = Path.Combine(diNew.FullName, $"KSin1.txt");
+                        File.WriteAllText(filenameUnpack, $"0 {Y0}\r\n{X} {Y}");
+                        if (arr[0] == 0x01) //если байт количества точек == 1, точек три!
+                        {
+                            File.AppendAllText(filenameUnpack, Environment.NewLine + Read5Bytes(reader.ReadBytes(5)));
+                        }
+                        i++;
                         continue;
                     }
-                    if (reader.ReadByte() == 0x0) // 5 byte -> 40 bit (15 bit X; 25 bit Y)
+                    else
                     {
-                        //считываем байты и конвертируем в двоичное число, которое потом конвертируем в координаты Х и У
-                        byte[] arr = reader.ReadBytes(5);
-                        string byteString = string.Join("", Enumerable.Range(0, arr.Length).Select(j =>
+                        byte[] arr = reader.ReadBytes(6); //48 bit 
+                        string binaryString = string.Join("", Enumerable.Range(0, arr.Length).Select(j =>
                                 Convert.ToString(arr[j], 2).PadLeft(8, '0')));
-                        byteString.ToStringKsegXY();
-                        // и записываем в файл с предыдущей координатой У
+                        string X = GetCoordinateFromBin(binaryString.Substring(8, 15));
+                        string Y = GetCoordinateFromBin(binaryString.Substring(23, 25));
+
+                        filenameUnpack = Path.Combine(diNew.FullName, $"KSin{i}.txt");
+                        File.WriteAllText(filenameUnpack, $"{lastY}\r\n{X} {Y}");
+                        if (arr[0] == 0x01) //если байт количества точек == 1, точек три!
+                        {
+                            File.AppendAllText(filenameUnpack, Environment.NewLine + Read5Bytes(reader.ReadBytes(5)));
+                        }
+                        i++;
 
                     }
-                    else // 10 byte
-                    {
 
-                    }
-                    i++;
+
+                    //считываем байты и конвертируем в двоичное число, которое потом конвертируем в координаты Х и У
+                    // и записываем в файл с предыдущей координатой У
+                    //filenameUnpack = Path.Combine(diNew.FullName, $"KSin{i}.txt");
+                    //string buff = string.Empty;
+                    //if (reader.ReadByte() == 0x0) // 2 Points
+                    //{
+                    //    // 5 byte -> 40 bit (15 bit X; 25 bit Y)
+                    //    buff = $"{lastY}\r\n{Read5Bytes(reader.ReadBytes(4))}";
+                    //}
+                    //else
+                    //{   // 10 byte -> 80 bit
+                    //    buff = $"{lastY}\r\n{Read5Bytes(reader.ReadBytes(4))}\r\n";
+                    //    buff += Read5Bytes(reader.ReadBytes(5));
+                    //}
+                    //File.WriteAllText(filenameUnpack, buff);
                 }
                 reader.Close();
                 
             });
             sw.Stop();
+        }
+
+        private string Read5Bytes(byte[] arr)
+        {
+            string byteString = string.Join("", Enumerable.Range(0, arr.Length).Select(j =>
+                    Convert.ToString(arr[j], 2).PadLeft(8, '0')));
+            return byteString.ToStringKsegXY();
         }
 
         private static string GetCoordinateFromBin(string binaryString)
