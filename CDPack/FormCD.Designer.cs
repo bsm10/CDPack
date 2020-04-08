@@ -32,10 +32,6 @@
             this.btnSPSSeg1 = new System.Windows.Forms.Button();
             this.lblKSeg1 = new System.Windows.Forms.Label();
             this.lblSPSSeg1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblKSeg2 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.btnKSeg2 = new System.Windows.Forms.Button();
             this.lblProgress = new System.Windows.Forms.Label();
             this.progressBarCD = new System.Windows.Forms.ProgressBar();
             this.btnExecute = new System.Windows.Forms.Button();
@@ -44,6 +40,9 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.btnPackFolder = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnUnpack = new System.Windows.Forms.Button();
+            this.lblUnpack = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnKSeg1
@@ -96,55 +95,6 @@
             this.lblSPSSeg1.Size = new System.Drawing.Size(833, 35);
             this.lblSPSSeg1.TabIndex = 3;
             this.lblSPSSeg1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.BackColor = System.Drawing.SystemColors.Window;
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label3.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(152, 333);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(833, 35);
-            this.label3.TabIndex = 7;
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblKSeg2
-            // 
-            this.lblKSeg2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblKSeg2.BackColor = System.Drawing.SystemColors.Window;
-            this.lblKSeg2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblKSeg2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.lblKSeg2.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblKSeg2.Location = new System.Drawing.Point(152, 281);
-            this.lblKSeg2.Name = "lblKSeg2";
-            this.lblKSeg2.Size = new System.Drawing.Size(833, 35);
-            this.lblKSeg2.TabIndex = 6;
-            this.lblKSeg2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(9, 333);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(137, 35);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Файл SPSSeg2";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // btnKSeg2
-            // 
-            this.btnKSeg2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnKSeg2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKSeg2.Location = new System.Drawing.Point(9, 281);
-            this.btnKSeg2.Name = "btnKSeg2";
-            this.btnKSeg2.Size = new System.Drawing.Size(137, 35);
-            this.btnKSeg2.TabIndex = 4;
-            this.btnKSeg2.Text = "Файл KSeg2";
-            this.btnKSeg2.UseVisualStyleBackColor = true;
             // 
             // lblProgress
             // 
@@ -215,7 +165,7 @@
             this.btnPackFolder.Name = "btnPackFolder";
             this.btnPackFolder.Size = new System.Drawing.Size(976, 40);
             this.btnPackFolder.TabIndex = 13;
-            this.btnPackFolder.Text = "Склеить файлы в папке";
+            this.btnPackFolder.Text = "Архивировать файлы в папке";
             this.btnPackFolder.UseVisualStyleBackColor = true;
             this.btnPackFolder.Click += new System.EventHandler(this.btnPackFolder_Click);
             // 
@@ -229,11 +179,53 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnUnpack
+            // 
+            this.btnUnpack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUnpack.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnUnpack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnUnpack.Location = new System.Drawing.Point(13, 303);
+            this.btnUnpack.Name = "btnUnpack";
+            this.btnUnpack.Size = new System.Drawing.Size(976, 40);
+            this.btnUnpack.TabIndex = 17;
+            this.btnUnpack.Text = "Разархивировать файл";
+            this.btnUnpack.UseVisualStyleBackColor = true;
+            this.btnUnpack.Click += new System.EventHandler(this.btnUnpack_Click);
+            // 
+            // lblUnpack
+            // 
+            this.lblUnpack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUnpack.BackColor = System.Drawing.SystemColors.Window;
+            this.lblUnpack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblUnpack.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.lblUnpack.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblUnpack.Location = new System.Drawing.Point(267, 262);
+            this.lblUnpack.Name = "lblUnpack";
+            this.lblUnpack.Size = new System.Drawing.Size(722, 35);
+            this.lblUnpack.TabIndex = 16;
+            this.lblUnpack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // button3
+            // 
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button3.Location = new System.Drawing.Point(13, 262);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(248, 35);
+            this.button3.TabIndex = 15;
+            this.button3.Text = "Выберите файл *.dat";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // FormCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 823);
+            this.Controls.Add(this.btnUnpack);
+            this.Controls.Add(this.lblUnpack);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnPackFolder);
             this.Controls.Add(this.lblFolderKseg);
@@ -241,10 +233,6 @@
             this.Controls.Add(this.btnExecute);
             this.Controls.Add(this.progressBarCD);
             this.Controls.Add(this.lblProgress);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.lblKSeg2);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.btnKSeg2);
             this.Controls.Add(this.lblSPSSeg1);
             this.Controls.Add(this.lblKSeg1);
             this.Controls.Add(this.btnSPSSeg1);
@@ -263,10 +251,6 @@
         private System.Windows.Forms.Button btnSPSSeg1;
         private System.Windows.Forms.Label lblKSeg1;
         private System.Windows.Forms.Label lblSPSSeg1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblKSeg2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button btnKSeg2;
         private System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.ProgressBar progressBarCD;
         private System.Windows.Forms.Button btnExecute;
@@ -275,6 +259,9 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button btnPackFolder;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUnpack;
+        private System.Windows.Forms.Label lblUnpack;
+        private System.Windows.Forms.Button button3;
     }
 }
 

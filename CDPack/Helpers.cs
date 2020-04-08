@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,19 +16,61 @@ namespace CDPack
             string[] strings = File.ReadAllLines(filePath);
             List<string[]> list = new List<string[]>();
             string result = string.Empty;
+            int counter = 0;
             foreach (string line in strings)
             {
                 string[] point = new string[2];
                 point = line.Split(' ');
                 if (point[0] != "0")
-                    result += point[0].ToKsegX() + point[1].ToKsegY();
+                    result += point[0].ToBinKsegX() + point[1].ToBinKsegY();
                 else
-                    result += point[1].ToKsegY();
+                    result += point[1].ToBinKsegY();
             }
             return result;
         }
+        public static string PackKSin(string filePath, bool isFirstFile = false)
+        {
+            string[] strings = File.ReadAllLines(filePath);
+            List<string[]> list = new List<string[]>();
+            string result = string.Empty;
+            foreach (string line in strings)
+            {
+                string[] point = new string[2];
+                point = line.Split(' ');
+                if (point[0] != "0")
+                    result += point[0].ToBinKsegX() + point[1].ToBinKsegY();
+                else if (isFirstFile)
+                    result += point[1].ToBinKsegY().PadLeft(32,'0');
+            }
+            if (strings.Length > 2)
+                return $"00000001{result}";
+            else 
+                return $"00000000{result}";
+        }
+        //1: 00000010 00000001 00010100 00111101 10111100
+        //2: 00001010 00100011 00011001 00010101 00010000
+        //3: 01000010 00101011 00010000 01100001 01010001 01000010 11101001 00010000 01100000 10110101
+        //4: 00010100 00011111 00010011 00010101 10111001
 
-        public static string UnPackKSeg(string packagedString)
+        //public static string PackKSeg2(string filePath)
+        //{
+        //    string[] strings = File.ReadAllLines(filePath);
+        //    List<string[]> list = new List<string[]>();
+        //    string result = string.Empty;
+        //    foreach (string line in strings)
+        //    {
+        //        string[] point = new string[2];
+        //        point = line.Split(' ');
+        //        if (point[0] != "0")
+        //            result += point[0].ToKsegX() + point[1].ToKsegY();
+        //        else
+        //            result += point[1].ToKsegY();
+        //    }
+        //    return result;
+        //}
+
+
+        public static string UnPackKSeg2(string packagedString)
         {
             //Распаковка справа на лево  X(15)Y(25)X(15)Y(25)
             List<string> lst = new List<string>();
@@ -63,7 +106,51 @@ namespace CDPack
             }
             return res;
         }
+        public static string UnPackKSeg(string packagedString)
+        {
+            //Распаковка справа на лево  X(15)Y(25)X(15)Y(25)
+            List<string> lst = new List<string>();
+            string bin = packagedString.HexToBin();
+            string res = string.Empty;
+            int len = bin.Length;
 
+            //var results = bin.Select((c, i) => new { c, i })
+            //.GroupBy(x => x.i / 40)
+            //.Select(g => string.Join("", g.Select(y => y.c)))
+            //.ToList();
+            string XY = string.Empty;
+            string Yi = string.Empty;
+            string Xi = string.Empty;
+            for (int i = 1; i < bin.Length; i++)
+            {
+                if (i * 40 <= len & i % 2 != 0)
+                {
+                    XY = bin.Substring(len - i * 40, 40);
+                    Yi = Sign(XY.Substring(15, 1)) + XY.Substring(16, 24).BinToDec();
+                    Xi = XY.Substring(0, 15).BinToDec();
+                    res = $"{Xi} {Yi}\r\n{res}";
+                }
+                else // добавить первый Y без X
+                {
+                    //0000000 1000010000001101110111001 000000100000000 1000101000011110110111100
+
+                    //XY = bin.Substring(i * 40 - len - 1, 25);
+                    if((len - i * 40) > 0)
+                    {
+                        XY = bin.Substring(len - i * 40, 25);
+                        Yi = Sign(XY.Substring(0, 1)) + XY.Substring(1, 24).BinToDec();
+                        res = $"0 {Yi}\r\n{res}";
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+                if (i * 40 >= len) break;
+            }
+            return res;
+        }
         private static string Sign (string bit)
         {
             if (bit == "0")
@@ -71,15 +158,65 @@ namespace CDPack
             else
                 return "-";
         }
+        public static string UnPackKSin(string packagedString)
+        {
+            //читаем первый байт - количество точек
+            //читаем 5 байт - 40 бит, если 2 точки
+            //читаем 10 байт - 80 бит, если 3 точки
+
+            List<string> lst = new List<string>();
+            string bin = packagedString.HexToBin();
+            string res = string.Empty;
+            int len = bin.Length;
+
+            string XY = string.Empty;
+            string Yi = string.Empty;
+            string Xi = string.Empty;
+            for (int i = 1; i < bin.Length; i++)
+            {
+                if (i * 40 <= len & i % 2 != 0)
+                {
+                    XY = bin.Substring(len - i * 40, 40);
+                    Yi = Sign(XY.Substring(15, 1)) + XY.Substring(16, 24).BinToDec();
+                    Xi = XY.Substring(0, 15).BinToDec();
+                    res = $"{Xi} {Yi}\r\n{res}";
+                }
+                else // добавить первый Y без X
+                {
+                    if ((len - i * 40) > 0)
+                    {
+                        XY = bin.Substring(len - i * 40, 25);
+                        Yi = Sign(XY.Substring(0, 1)) + XY.Substring(1, 24).BinToDec();
+                        res = $"0 {Yi}\r\n{res}";
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+                if (i * 40 >= len) break;
+            }
+            return res;
+        }
+
     }
 
     public static class StringExtension
     {
-        public static string ToKsegY(this string number)
+        public static string ToStringKsegXY(this string binaryString)
+        {
+            string X = binaryString.Substring(0, 15).BinToDec().ToString();
+            string Y = binaryString.Substring(16, 24).BinToDec().ToString();
+            if(binaryString.Substring(15, 1).BinToDec() == "1" ) Y = "-" + Y;
+            return $"{X} {Y}";
+        }
+
+        public static string ToBinKsegY(this string number)
         {
             //Если число отрицательное, отбрасываем знак и конвертируем положительное число, а знак отдельным битом
             //25 бит с учётом первого бита на знак ("0"="+";"1"="-").
-            //0000 1 10000001101110111001	-531385	
+            //0000110000001101110111001	-531385	
             //1 бит-знак, 24 бит-значение Y.
             int num = Convert.ToInt32(number, 10);
             string bin_value = Convert.ToString(Math.Abs(num), 2);
@@ -90,7 +227,7 @@ namespace CDPack
             else
                 return $"0{bin_value.PadLeft(24, '0')}";
         }
-        public static string ToKsegX(this string number)
+        public static string ToBinKsegX(this string number)
         {
             //Если число отрицательное, отбрасываем знак и конвертируем положительное число, а знак отдельным битом
             //000000 100000000	256	 
@@ -154,6 +291,25 @@ namespace CDPack
                 MessageBox.Show(ex.Message);
             }
             return string.Empty;
+        }
+
+        public static byte[] BinToByte(this string binary)
+        {
+            try
+            {
+                int numOfBytes = binary.Length / 8;
+                byte[] bytes = new byte[numOfBytes];
+                for (int i = 0; i < numOfBytes; ++i)
+                {
+                    bytes[i] = Convert.ToByte(binary.Substring(8 * i, 8), 2);
+                }
+                return bytes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
         }
     }
 }
