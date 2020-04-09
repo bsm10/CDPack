@@ -1,7 +1,4 @@
-﻿using SharpCompress.Archives;
-using SharpCompress.Common;
-using SharpCompress.Writers;
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
@@ -60,27 +57,6 @@ namespace CDPack
                     //Console.WriteLine($"Compressed {fileToCompress.Name} from {fileToCompress.Length.ToString()} to {info.Length.ToString()} bytes.");
                 }
             }
-
-        }
-
-        public static async Task CompressFolderAsync(string folder)
-        {
-            await Task.Run(() =>
-            {
-
-                DirectoryInfo di = new DirectoryInfo(folder);
-                string zipPath = Path.Combine(di.Parent.FullName, "CD.zip");
-
-                using (Stream stream = File.OpenWrite(zipPath))
-                using (var writer = WriterFactory.Open(stream, ArchiveType.Tar, new WriterOptions(CompressionType.GZip)
-                {
-                    LeaveStreamOpen = true
-                }))
-                {
-                    writer.WriteAll(folder, "*", SearchOption.AllDirectories);
-                }
-            });
-
 
         }
 

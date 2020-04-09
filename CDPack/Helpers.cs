@@ -16,7 +16,7 @@ namespace CDPack
             string[] strings = File.ReadAllLines(filePath);
             List<string[]> list = new List<string[]>();
             string result = string.Empty;
-            int counter = 0;
+            ////int counter = 0;
             foreach (string line in strings)
             {
                 string[] point = new string[2];
@@ -47,28 +47,6 @@ namespace CDPack
             else 
                 return $"00000000{result}";
         }
-        //1: 00000010 00000001 00010100 00111101 10111100
-        //2: 00001010 00100011 00011001 00010101 00010000
-        //3: 01000010 00101011 00010000 01100001 01010001 01000010 11101001 00010000 01100000 10110101
-        //4: 00010100 00011111 00010011 00010101 10111001
-
-        //public static string PackKSeg2(string filePath)
-        //{
-        //    string[] strings = File.ReadAllLines(filePath);
-        //    List<string[]> list = new List<string[]>();
-        //    string result = string.Empty;
-        //    foreach (string line in strings)
-        //    {
-        //        string[] point = new string[2];
-        //        point = line.Split(' ');
-        //        if (point[0] != "0")
-        //            result += point[0].ToKsegX() + point[1].ToKsegY();
-        //        else
-        //            result += point[1].ToKsegY();
-        //    }
-        //    return result;
-        //}
-
 
         public static string UnPackKSeg2(string packagedString)
         {

@@ -115,7 +115,9 @@ namespace CDPack
         private async Task PackFolderKSegAsync(string folder)
         {
             string filename = "CD.dat";
-            string[] files = Directory.GetFiles(folder, "Ks*.txt");
+            //string[] files = Directory.GetFiles(folder, "Ks*.txt");
+            string[] files = Directory.GetFiles(folder, "KS*.txt")
+                .OrderBy(x => x, new ComparerFileNames()).ToArray();
             string result = string.Empty;
             progressBarCD.Value = 0;
             progressBarCD.Minimum = 0;
@@ -166,7 +168,11 @@ namespace CDPack
                 string filenameUnpack;
                 string lastY = string.Empty;
                 BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open));
-                // пока не достигнут конец файла считываем каждое значение из файла
+                string X = string.Empty;
+                string Y = string.Empty;
+                string temp = string.Empty;
+                string binaryString = string.Empty;
+                //пока не достигнут конец файла считываем каждое значение из файла
                 while (reader.PeekChar() > -1)
                 {
                     progress.Report((int)(reader.BaseStream.Position * 100 / fi.Length));
@@ -176,14 +182,14 @@ namespace CDPack
                     {
                         //Первый файл
                         byte[] arr = reader.ReadBytes(10);
-                        string binaryString = string.Join("", Enumerable.Range(0, arr.Length).Select(j =>
+                        binaryString = string.Join("", Enumerable.Range(0, arr.Length).Select(j =>
                                 Convert.ToString(arr[j], 2).PadLeft(8, '0')));
-                        string Y0 = GetCoordinateFromBin(binaryString.Substring(15, 25));
-                        string X = GetCoordinateFromBin(binaryString.Substring(40, 15));
-                        string Y = GetCoordinateFromBin(binaryString.Substring(55, 25));
+                        temp = GetCoordinateFromBin(binaryString.Substring(15, 25));
+                        X = GetCoordinateFromBin(binaryString.Substring(40, 15));
+                        Y = GetCoordinateFromBin(binaryString.Substring(55, 25));
                         lastY = $"0 {Y}";
                         filenameUnpack = Path.Combine(diNew.FullName, $"KSin1.txt");
-                        File.WriteAllText(filenameUnpack, $"0 {Y0}\r\n{X} {Y}");
+                        File.WriteAllText(filenameUnpack, $"0 {temp}\r\n{X} {Y}");
                         if (arr[0] == 0x01) //если байт количества точек == 1, точек три!
                         {
                             File.AppendAllText(filenameUnpack, Environment.NewLine + Read5Bytes(reader.ReadBytes(5)));
@@ -194,16 +200,21 @@ namespace CDPack
                     else
                     {
                         byte[] arr = reader.ReadBytes(6); //48 bit 
-                        string binaryString = string.Join("", Enumerable.Range(0, arr.Length).Select(j =>
+                        binaryString = string.Join("", Enumerable.Range(0, arr.Length).Select(j =>
                                 Convert.ToString(arr[j], 2).PadLeft(8, '0')));
-                        string X = GetCoordinateFromBin(binaryString.Substring(8, 15));
-                        string Y = GetCoordinateFromBin(binaryString.Substring(23, 25));
+                        X = GetCoordinateFromBin(binaryString.Substring(8, 15));
+                        Y = GetCoordinateFromBin(binaryString.Substring(23, 25));
                         filenameUnpack = Path.Combine(diNew.FullName, $"KSin{i}.txt");
                         File.WriteAllText(filenameUnpack, $"{lastY}\r\n{X} {Y}");
+
                         if (arr[0] == 0x01) //если байт количества точек == 1, точек три!
                         {
-                            File.AppendAllText(filenameUnpack, Environment.NewLine + Read5Bytes(reader.ReadBytes(5)));
+                            temp = Read5Bytes(reader.ReadBytes(5));
+                            File.AppendAllText(filenameUnpack, Environment.NewLine + temp);
+                            Y = temp.Split(' ')[1];
                         }
+                        
+                        lastY = $"0 {Y}";
                         i++;
                     }
                 }
@@ -302,6 +313,7 @@ namespace CDPack
 
         private async void btnUnpack_Click(object sender, EventArgs e)
         {
+            if (lblUnpack.Text == "") return;
             await UnPackKSinAsync(lblUnpack.Text);
         }
 
